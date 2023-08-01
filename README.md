@@ -34,7 +34,7 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 # Laravel Blog API <a name="about-project"></a>
+## 📖 Laravel Blog API <a name="about-project"></a>
 
 This is a blog application built with Laravel as the API backend and Vue.js as the frontend. Users can register, login, create, read, update, and delete blog posts. Additionally, users can like and comment on blog posts.
 
@@ -109,7 +109,6 @@ Clone this repository to your desired directory:
   git checkout dev
 ```
 
-
 ### Install Dependencies:
 
 Open project with a code editor and install this project with:
@@ -117,6 +116,15 @@ Open project with a code editor and install this project with:
 ```sh
   composer install
   npm install
+```
+
+### Configure Local Environment:
+
+1. Create a `.env` file based on the `.env.example` file and update the database configuration.
+2. Generate the application key and add to the `.env` file:
+
+```sh
+  php artisan key:generate
 ```
 
 ### Compile the Vue.js Frontend:
@@ -212,7 +220,7 @@ If you like this project...
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank [Propelond]('https://propelond.com')
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
