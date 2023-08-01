@@ -42,7 +42,7 @@ This is a blog application built with Laravel as the API backend and Vue.js as t
 
 ### Tech Stack <a name="tech-stack"></a>
 
-- PHP with Laravel framework for the backend API.
+- PHP Version 8.0.28 with Laravel v9.52.12 framework for the backend API.
 - MySQL database for data storage.
 - Vue.js and Tailwind CSS for the frontend.
 - JWT for authentication.
