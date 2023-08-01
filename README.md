@@ -34,7 +34,7 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-## 📖 Laravel Blog API <a name="about-project"></a>
+# 📖 Laravel Blog API <a name="about-project"></a>
 
 This is a blog application built with Laravel as the API backend and Vue.js as the frontend. Users can register, login, create, read, update, and delete blog posts. Additionally, users can like and comment on blog posts.
 
