@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+    public function welcome()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $posts = Post::all();
+
+        return view('welcome', compact('posts'));
+    }
+    
     public function index()
     {
         $posts = Post::all();
