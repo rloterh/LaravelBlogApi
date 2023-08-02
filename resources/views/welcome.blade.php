@@ -15,13 +15,24 @@
 
     <main class="container mx-auto my-4">
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            @foreach ($posts as $post)
-            <div class="bg-white p-4 rounded shadow">
-                <h2 class="text-lg font-bold mb-2">{{ $post->title }}</h2>
-                <p class="text-gray-600">{{ $post->description }}</p>
-                <a href="{{ route('post_details', $post->id) }}" class="block mt-2 text-blue-500">Read More</a>
-            </div>
-            @endforeach
+            @auth
+                @if($posts->count() > 0)
+                    <h2 class="text-2xl font-bold mb-4">All Posts</h2>
+                    <ul>
+                        @foreach ($posts as $post)
+                        <div class="bg-white p-4 rounded shadow">
+                            <h2 class="text-lg font-bold mb-2">{{ $post->title }}</h2>
+                            <p class="text-gray-600">{{ $post->description }}</p>
+                            <a href="{{ route('post_details', $post->id) }}" class="block mt-2 text-blue-500">Read More</a>
+                        </div>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>No posts available.</p>
+                @endif
+            @else
+                <p>Please <a href="{{ route('login') }}">login</a> to view posts.</p>
+            @endauth
         </section>
     </main>
 
