@@ -1,36 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 
-// Homepage
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Redirect to login if not authenticated
+Route::middleware('guest')->group(function () {
+    Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+});
 
-// Registration
-Route::get('/register', 'AuthController@showRegistrationForm')->name('register');
-Route::post('/register', 'AuthController@register');
+// Routes accessible only to authenticated users
+Route::middleware('auth')->group(function () {
+    // Logout route
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Login
-Route::get('/login', 'AuthController@showLoginForm')->name('login');
-Route::post('/login', 'AuthController@login');
+    // Routes related to posts
+    Route::resource('posts', PostController::class);
+});
 
-// Logout
-Route::post('/logout', 'AuthController@logout')->name('logout');
-
-// All Posts
-Route::get('/posts', 'PostController@index')->name('all_posts');
-
-// Post Details
-Route::get('/posts/{id}', 'PostController@show')->name('post_details');
-
-// Create Post
-Route::get('/posts/create', 'PostController@create')->name('create_post');
-Route::post('/posts', 'PostController@store');
-
-// Edit Post
-Route::get('/posts/{id}/edit', 'PostController@edit')->name('edit_post');
-Route::put('/posts/{id}', 'PostController@update');
-
-// Delete Post
-Route::delete('/posts/{id}', 'PostController@destroy')->name('delete_post');
+// Redirect to login if not authenticated, else display posts
+Route::get('/welcome', [PostController::class, 'welcome'])->name('welcome');
