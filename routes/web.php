@@ -20,3 +20,7 @@ Route::middleware('auth')->group(function () {
 
 // Redirect to login if not authenticated, else display posts
 Route::get('/welcome', [PostController::class, 'welcome'])->name('welcome');
+
+// Registration
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
