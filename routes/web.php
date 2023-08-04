@@ -6,7 +6,7 @@ use App\Http\Controllers\PostController;
 
 // Public routes
 Route::get('/', function () { return view('welcome'); });
-Route::get('/')->name('home')->middleware('guest');
+//Route::get('/')->name('home')->middleware('guest');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register')->middleware('guest');
