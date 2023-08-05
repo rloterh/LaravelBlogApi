@@ -31,7 +31,6 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -39,8 +38,11 @@ class PostController extends Controller
         }
 
         // Upload the image and get its URL
-        $imagePath = $request->file('image')->store('public/images');
-        $imageUrl = asset('storage/images/' . basename($imagePath));
+        //$imagePath = $request->file('image')->store('public/images');
+        $imageUrl = null;
+        if ($request->has('image')) {
+            $imageUrl = $request->image;
+        }
 
         $post = Post::create([
             'title' => $request->title,
@@ -70,17 +72,18 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'description' => 'required|string',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
+        $post = Post::findOrFail($id);
+
         // If a new image is uploaded, update the image URL
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/images');
-            $imageUrl = asset('storage/images/' . basename($imagePath));
+            // $imagePath = $request->file('image')->store('public/images');
+            // $imageUrl = asset('storage/images/' . basename($imagePath));
             $post->image = $imageUrl;
         }
 
