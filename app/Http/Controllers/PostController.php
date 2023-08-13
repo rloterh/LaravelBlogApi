@@ -54,6 +54,17 @@ class PostController extends Controller
         return response()->json($post, 201);
     }
 
+    public function getPostUser($postId)
+    {
+        $post = Post::findOrFail($postId);
+        $user = $post->user; // Accessing the user relationship
+        
+        return response()->json([
+            'post' => $post,
+            'user' => $user,
+        ]);
+    }
+
     public function show($id)
     {
         $post = Post::findOrFail($id);

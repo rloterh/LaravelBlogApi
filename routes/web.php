@@ -1,33 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PostController;
 
-// Public routes
-Route::get('/', function () { return view('welcome'); });
-//Route::get('/')->name('home')->middleware('guest');
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register')->middleware('guest');
-Route::post('/register', [AuthController::class, 'register']);
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-// Protected routes
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/', fn () => view('app'))->name('app');
 
-    // Post routes
-    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-    Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
-    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
-    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
-    Route::post('/posts/{id}/like', [PostController::class, 'like'])->name('posts.like');
-    Route::post('/posts/{id}/comment', [PostController::class, 'comment'])->name('posts.comment');
-});
+Route::get('/reset-password/{token}', fn () => view('app'))
+    ->middleware(['guest:' . config('fortify.guard')])
+    ->name('password.reset');
 
-// Redirect to login page for all other routes
-Route::fallback(function () {
-    return redirect()->route('login');
-});
+Route::get('{any}', fn () => view('app'))->where('any', '^((?!api).)*');
