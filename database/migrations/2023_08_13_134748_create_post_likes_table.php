@@ -11,13 +11,11 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
+    public function up() {
+        Schema::create('post_likes', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('post_id')->constrained();
-            $table->text('content');
+            $table->primary(['user_id', 'post_id']);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('post_likes');
     }
 };
