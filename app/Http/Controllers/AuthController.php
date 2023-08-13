@@ -66,13 +66,13 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logged out successfully']);
     }
 
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
+    // public function showLoginForm()
+    // {
+    //     return view('auth.login');
+    // }
 
-    public function showRegistrationForm()
-    {
-        return view('auth.register');
-    }
+    // public function showRegistrationForm()
+    // {
+    //     return view('auth.register');
+    // }
 }
