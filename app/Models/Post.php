@@ -23,6 +23,10 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
     // Validation rules for creating/updating a Post
     public static function validationRules()
     {
