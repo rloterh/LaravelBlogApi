@@ -1,12 +1,29 @@
 <template>
-  <h1 class="text-3xl font-bold underline">
-    Thank you, Jesus!
-  </h1>
+  <nav class="bg-gray-900 text-white p-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <a href="/" class="font-bold text-lg logo">TravelBlog</a>
+      <!-- Nav Links: Home, Categories -->
+      <!-- Display Bio link only if user is signed in -->
+    </div>
+    <div class="flex items-center">
+      <!-- Display Username and Logout link if user is signed in -->
+      <!-- Display Login/Sign Up links if user is not signed in -->
+    </div>
+  </nav>
 </template>
 
-<!-- <template>
-  <router-view :key="$route.path"></router-view>
-</template> -->
+<script>
+export default {
+  name: 'NavigationBar',
+}
+</script>
+
+<style scoped>
+.logo {
+  /* Apply blend modes and effects to make it look like a logo */
+}
+</style>
+
 
 <!-- <script>
 import axios from 'axios'
