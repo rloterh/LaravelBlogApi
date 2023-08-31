@@ -13,15 +13,6 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function likes()
-    {
-        return $this->belongsToMany(User::class, 'post_likes', 'post_id', 'user_id');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
 
     // Validation rules for creating/updating a Post
     public static function validationRules()

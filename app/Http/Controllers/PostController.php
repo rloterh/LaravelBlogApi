@@ -106,40 +106,4 @@ class PostController extends Controller
         $post->delete();
         return response()->json(['message' => 'Post deleted successfully'], 200);
     }
-
-    public function like(Request $request, $id)
-    {
-        $post = Post::findOrFail($id);
-        $user = auth()->user();
-
-        // Check if the user has already liked the post
-        if ($post->likes()->where('user_id', $user->id)->exists()) {
-            return response()->json(['error' => 'User has already liked the post'], 400);
-        }
-
-        $post->likes()->attach($user->id);
-        return response()->json(['message' => 'Post liked successfully'], 200);
-    }
-
-    public function comment(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'content' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
-        }
-
-        $post = Post::findOrFail($id);
-        $user = auth()->user();
-
-        $comment = new Comment([
-            'content' => $request->content,
-            'user_id' => $user->id,
-        ]);
-
-        $post->comments()->save($comment);
-        return response()->json(['message' => 'Comment added successfully'], 201);
-    }
 }
